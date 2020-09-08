@@ -42,5 +42,29 @@ public class Processos {
 		
 	}
 
-
+	public void killProcess(String param) {
+		String cmdPid = "TASKKILL /PID";
+		String cmdNome = "TASKKILL /IM";
+		int pid = 0 ;
+		StringBuffer buffer = new StringBuffer();
+		
+		try {
+			pid = Integer.parseInt(param);
+			buffer.append(cmdPid);
+			buffer.append(" ");
+			buffer.append(pid);		
+		}catch (NumberFormatException e) {
+			buffer.append(cmdNome);
+			buffer.append(" ");
+			buffer.append(param);
+		}
+		
+		try {
+			Runtime.getRuntime().exec(buffer.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
